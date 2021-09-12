@@ -36,108 +36,127 @@ class MyHomePage extends StatelessWidget {
     deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kNuanceColour,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: kNuanceColour,
+      // ),
       //TODO:drawerの設定
       // drawer: Drawer(),
-      body: deviceWidth > 1200.0
-          ? Row(
-        children: [
-          SizedBox(
-            //height: 800で * 1, width: 250で0.2
-            height: deviceHeight * 0.1,
-            width: deviceWidth * 0.05,
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/portfolio.png"),
+            fit: BoxFit.fill,
           ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+        child: deviceWidth > 1200.0
+            ? Row(
                 children: [
                   SizedBox(
+                    //height: 800で * 1, width: 250で0.2
                     height: deviceHeight * 0.1,
                     width: deviceWidth * 0.05,
                   ),
-                  Text('作成したアプリ'),
-                  SizedBox(
-                    height: deviceHeight * 0.005,
-                    width: deviceWidth * 0.05,
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: deviceHeight * 0.1,
+                            width: deviceWidth * 0.05,
+                          ),
+                          // Container(
+                          //   decoration: BoxDecoration(
+                          //     shape: BoxShape.circle,
+                          //     color: kBaseColour,
+                          //   ),
+                          //   child: Text(
+                          //     '作成したアプリ',
+                          //     style: TextStyle(
+                          //         fontWeight: FontWeight.bold,
+                          //         color: kBaseColour),
+                          //   ),
+                          // ),
+                          SizedBox(
+                            height: deviceHeight * 0.005,
+                            width: deviceWidth * 0.05,
+                          ),
+                          Container(
+                            ///アプリ紹介ウィジェット
+                            child: appInfo(
+                                deviceHeight: deviceHeight,
+                                deviceWidth: deviceWidth),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  Container(
-                    ///アプリ紹介ウィジェット
-                    child: appInfo(
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      ///自己紹介ウィジェット
+                      child: aboutMeForPC(
+                        aboutme: '名前 : 松丸仁美\n1991年生まれ\n広島出身・京都市在住',
+                        tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
+                        language: '●Dart\n●C\n●Python',
+                        backgroundImageUrl: "images/hitomi.png",
+                        deviceWidth: deviceWidth,
                         deviceHeight: deviceHeight,
-                        deviceWidth: deviceWidth),
+                      ),
+                    ),
                   ),
                 ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              ///自己紹介ウィジェット
-              child: aboutMeForPC(
-                aboutme: '名前 : 松丸仁美',
-                tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
-                language: '●Dart\n●C\n●Python',
-                backgroundImageUrl: "images/hitomi.png",
-                deviceWidth: deviceWidth,
-                deviceHeight: deviceHeight,
-              ),
-            ),
-          ),
-        ],
-      )
-          : SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: deviceHeight * 0.05,
-                      width: deviceWidth * 0.05,
-                    ),
-                    Text(
-                      '作成したアプリ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(
-                      height: deviceHeight * 0.01,
-                      width: deviceWidth * 0.05,
-                    ),
-                    Container(
-                      ///アプリ紹介ウィジェット
-                      child: appInfo(
+              )
+            : SingleChildScrollView(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: deviceHeight * 0.05,
+                              width: deviceWidth * 0.05,
+                            ),
+                            Text(
+                              '作成したアプリ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: deviceHeight * 0.01,
+                              width: deviceWidth * 0.05,
+                            ),
+                            Container(
+                              ///アプリ紹介ウィジェット
+                              child: appInfo(
+                                  deviceHeight: deviceHeight,
+                                  deviceWidth: deviceWidth),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30.0,
+                        width: 20.0,
+                      ),
+                      Container(
+                        child: aboutMeForPhone(
+                          aboutme: '名前 : 松丸仁美\n1991年生まれ\n広島出身・京都市在住',
+                          tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
+                          language: '●Dart\n●C\n●Python',
+                          backgroundImageUrl: "images/hitomi.png",
+                          deviceWidth: deviceWidth,
                           deviceHeight: deviceHeight,
-                          deviceWidth: deviceWidth),
-                    ),
-                  ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 30.0,
-                width: 20.0,
-              ),
-              Container(
-                child: aboutMeForPhone(
-                  aboutme: '名前 : 松丸仁美',
-                  tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
-                  language: '●Dart\n●C\n●Python',
-                  backgroundImageUrl: "images/hitomi.png",
-                  deviceWidth: deviceWidth,
-                  deviceHeight: deviceHeight,
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -149,51 +168,49 @@ Widget appInfo({required double deviceHeight, required double deviceWidth}) {
   return Container(
     child: deviceWidth > 1200.0
         ? SingleChildScrollView(
-      child: Column(
-        children: [
-          Row(
-            //TODO: PCはデータが増えたらここも修正
+            child: Column(
+              children: [
+                Row(
+                  //TODO: PCはデータが増えたらここも修正
+                  children: [
+                    myAppForPC(
+                        myAppList: myAppList,
+                        deviceHeight: deviceHeight,
+                        deviceWidth: deviceWidth,
+                        index: 0),
+                    myAppForPC(
+                        myAppList: myAppList,
+                        deviceHeight: deviceHeight,
+                        deviceWidth: deviceWidth,
+                        index: 1),
+                    // myAppForPC(myAppList: myAppList, deviceHeight: deviceHeight, deviceWidth: deviceWidth, index: 2),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : Column(
             children: [
-              myAppForPC(
-                  myAppList: myAppList,
-                  deviceHeight: deviceHeight,
-                  deviceWidth: deviceWidth,
-                  index: 0),
-              myAppForPC(
-                  myAppList: myAppList,
-                  deviceHeight: deviceHeight,
-                  deviceWidth: deviceWidth,
-                  index: 1),
-              // myAppForPC(myAppList: myAppList, deviceHeight: deviceHeight, deviceWidth: deviceWidth, index: 2),
+              Container(
+                ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
+                height: 550.0,
+                width: 350.0,
+                child: PageView.builder(
+                    controller:
+                        PageController(initialPage: 0, viewportFraction: 0.9),
+                    itemCount: myAppList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return myAppForPhone(
+                          myAppList: myAppList,
+                          deviceHeight: deviceHeight,
+                          deviceWidth: deviceWidth,
+                          index: index);
+                    }),
+              ),
             ],
           ),
-        ],
-      ),
-    )
-        : Column(
-      children: [
-        Container(
-          ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
-          height: 550.0,
-          width: 350.0,
-          child: PageView.builder(
-              controller:
-              PageController(initialPage: 0, viewportFraction: 0.9),
-              itemCount: myAppList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return myAppForPhone(
-                    myAppList: myAppList,
-                    deviceHeight: deviceHeight,
-                    deviceWidth: deviceWidth,
-                    index: index);
-              }),
-        ),
-      ],
-    ),
   );
 }
-
-
 
 ///------------------------------------------------------
 ///これ以降は固定ウィジェット
@@ -201,9 +218,9 @@ Widget appInfo({required double deviceHeight, required double deviceWidth}) {
 ///アプリ紹介【項目】@ PC
 Widget myAppForPC(
     {required List<Map<String, dynamic>> myAppList,
-      required double deviceHeight,
-      required double deviceWidth,
-      required int index}) {
+    required double deviceHeight,
+    required double deviceWidth,
+    required int index}) {
   return InkWell(
     child: Card(
       elevation: 5.0,
@@ -252,11 +269,11 @@ Widget myAppForPC(
 ///自己紹介 @ PC
 Widget aboutMeForPC(
     {required String aboutme,
-      required String tools,
-      required String language,
-      required double deviceHeight,
-      required double deviceWidth,
-      required String backgroundImageUrl}) {
+    required String tools,
+    required String language,
+    required double deviceHeight,
+    required double deviceWidth,
+    required String backgroundImageUrl}) {
   return Container(
     child: Card(
       child: Column(
@@ -343,9 +360,9 @@ Widget aboutMeForPC(
 ///アプリ紹介【項目】@ スマホ
 Widget myAppForPhone(
     {required List<Map<String, dynamic>> myAppList,
-      required double deviceHeight,
-      required double deviceWidth,
-      required int index}) {
+    required double deviceHeight,
+    required double deviceWidth,
+    required int index}) {
   return Column(
     children: [
       InkWell(
@@ -397,7 +414,7 @@ Widget myAppForPhone(
         dotsCount: myAppList.length,
         position: index.toDouble(),
         decorator:
-        DotsDecorator(color: kBaseColour, activeColor: kAccentColour),
+            DotsDecorator(color: kBaseColour, activeColor: kAccentColour),
       ),
     ],
   );
@@ -406,11 +423,11 @@ Widget myAppForPhone(
 ///自己紹介 @ スマホ
 Widget aboutMeForPhone(
     {required String aboutme,
-      required String tools,
-      required String language,
-      required double deviceHeight,
-      required double deviceWidth,
-      required String backgroundImageUrl}) {
+    required String tools,
+    required String language,
+    required double deviceHeight,
+    required double deviceWidth,
+    required String backgroundImageUrl}) {
   return Container(
     child: Card(
       elevation: 5.0,
