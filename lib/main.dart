@@ -35,20 +35,15 @@ class MyHomePage extends StatelessWidget {
     deviceHeight = MediaQuery.of(context).size.height;
     deviceWidth = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: kNuanceColour,
-      // ),
-      //TODO:drawerの設定
-      // drawer: Drawer(),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("images/portfolio.png"),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: deviceWidth > 1200.0
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: kBaseColour,
+        // appBar: AppBar(
+        //   backgroundColor: kNuanceColour,
+        // ),
+        //TODO:drawerの設定
+        // drawer: Drawer(),
+        body: deviceWidth > 1200.0
             ? Row(
                 children: [
                   SizedBox(
@@ -58,50 +53,46 @@ class MyHomePage extends StatelessWidget {
                   ),
                   Expanded(
                     flex: 3,
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: deviceHeight * 0.1,
-                            width: deviceWidth * 0.05,
-                          ),
-                          // Container(
-                          //   decoration: BoxDecoration(
-                          //     shape: BoxShape.circle,
-                          //     color: kBaseColour,
-                          //   ),
-                          //   child: Text(
-                          //     '作成したアプリ',
-                          //     style: TextStyle(
-                          //         fontWeight: FontWeight.bold,
-                          //         color: kBaseColour),
-                          //   ),
-                          // ),
-                          SizedBox(
-                            height: deviceHeight * 0.005,
-                            width: deviceWidth * 0.05,
-                          ),
-                          Container(
-                            ///アプリ紹介ウィジェット
-                            child: appInfo(
-                                deviceHeight: deviceHeight,
-                                deviceWidth: deviceWidth),
-                          ),
-                        ],
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: deviceHeight * 0.1,
+                          width: deviceWidth * 0.05,
+                        ),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //     shape: BoxShape.circle,
+                        //     color: kBaseColour,
+                        //   ),
+                        //   child: Text(
+                        //     '作成したアプリ',
+                        //     style: TextStyle(
+                        //         fontWeight: FontWeight.bold,
+                        //         color: kBaseColour),
+                        //   ),
+                        // ),
+                        SizedBox(
+                          height: deviceHeight * 0.005,
+                          width: deviceWidth * 0.05,
+                        ),
+                        appInfo(
+                            deviceHeight: deviceHeight,
+                            deviceWidth: deviceWidth),
+                      ],
                     ),
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(
-                      ///自己紹介ウィジェット
+                    child: Padding(
+                      padding: EdgeInsets.all(deviceWidth * 0.005),
                       child: aboutMeForPC(
-                        aboutme: '名前 : 松丸仁美\n1991年生まれ\n広島出身・京都市在住',
-                        tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
-                        language: '●Dart\n●C\n●Python',
-                        backgroundImageUrl: "images/hitomi.png",
+                        aboutme: aboutMeText,
+                        career: careerText,
+                        tools: toolsText,
+                        language: languageText,
+                        backgroundImageUrl: iconsText,
                         deviceWidth: deviceWidth,
                         deviceHeight: deviceHeight,
                       ),
@@ -113,42 +104,39 @@ class MyHomePage extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: deviceHeight * 0.05,
-                              width: deviceWidth * 0.05,
-                            ),
-                            Text(
-                              '作成したアプリ',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: deviceHeight * 0.01,
-                              width: deviceWidth * 0.05,
-                            ),
-                            Container(
-                              ///アプリ紹介ウィジェット
-                              child: appInfo(
-                                  deviceHeight: deviceHeight,
-                                  deviceWidth: deviceWidth),
-                            ),
-                          ],
-                        ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: deviceHeight * 0.05,
+                            width: deviceWidth * 0.05,
+                          ),
+                          // Text(
+                          //   '作成したアプリ',
+                          //   style: TextStyle(fontWeight: FontWeight.bold),
+                          // ),
+                          SizedBox(
+                            height: deviceHeight * 0.01,
+                            width: deviceWidth * 0.05,
+                          ),
+                          appInfo(
+                              deviceHeight: deviceHeight,
+                              deviceWidth: deviceWidth),
+                        ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30.0,
                         width: 20.0,
                       ),
-                      Container(
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
                         child: aboutMeForPhone(
-                          aboutme: '名前 : 松丸仁美\n1991年生まれ\n広島出身・京都市在住',
-                          tools: '●AndroidStudio\n●VScode\n●figma\n●GitHub',
-                          language: '●Dart\n●C\n●Python',
-                          backgroundImageUrl: "images/hitomi.png",
+                          aboutme: aboutMeText,
+                          career: careerText,
+                          tools: toolsText,
+                          language: languageText,
+                          backgroundImageUrl: iconsText,
                           deviceWidth: deviceWidth,
                           deviceHeight: deviceHeight,
                         ),
@@ -165,51 +153,61 @@ class MyHomePage extends StatelessWidget {
 ///ウィジェット
 ///アプリ紹介 @ PC
 Widget appInfo({required double deviceHeight, required double deviceWidth}) {
-  return Container(
-    child: deviceWidth > 1200.0
-        ? SingleChildScrollView(
-            child: Column(
-              children: [
-                Row(
-                  //TODO: PCはデータが増えたらここも修正
-                  children: [
-                    myAppForPC(
-                        myAppList: myAppList,
-                        deviceHeight: deviceHeight,
-                        deviceWidth: deviceWidth,
-                        index: 0),
-                    myAppForPC(
-                        myAppList: myAppList,
-                        deviceHeight: deviceHeight,
-                        deviceWidth: deviceWidth,
-                        index: 1),
-                    // myAppForPC(myAppList: myAppList, deviceHeight: deviceHeight, deviceWidth: deviceWidth, index: 2),
-                  ],
-                ),
-              ],
-            ),
-          )
-        : Column(
+  return deviceWidth > 1200.0
+      ? SingleChildScrollView(
+          child: Column(
             children: [
-              Container(
-                ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
-                height: 550.0,
-                width: 350.0,
-                child: PageView.builder(
-                    controller:
-                        PageController(initialPage: 0, viewportFraction: 0.9),
-                    itemCount: myAppList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return myAppForPhone(
-                          myAppList: myAppList,
-                          deviceHeight: deviceHeight,
-                          deviceWidth: deviceWidth,
-                          index: index);
-                    }),
+              Row(
+                //TODO: PCはデータが増えたらここも修正
+                children: [
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 0),
+                  SizedBox(
+                    height: deviceHeight * 0.01,
+                    width: deviceWidth * 0.01,
+                  ),
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 1),
+                  SizedBox(
+                    height: deviceHeight * 0.01,
+                    width: deviceWidth * 0.01,
+                  ),
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 2),
+                ],
               ),
             ],
           ),
-  );
+        )
+      : Column(
+          children: [
+            SizedBox(
+              ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
+              height: 550.0,
+              width: 350.0,
+              child: PageView.builder(
+                  controller:
+                      PageController(initialPage: 0, viewportFraction: 0.9),
+                  itemCount: myAppList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return myAppForPhone(
+                        myAppList: myAppList,
+                        deviceHeight: deviceHeight,
+                        deviceWidth: deviceWidth,
+                        index: index);
+                  }),
+            ),
+          ],
+        );
 }
 
 ///------------------------------------------------------
@@ -224,14 +222,14 @@ Widget myAppForPC(
   return InkWell(
     child: Card(
       elevation: 5.0,
-      child: Container(
+      child: SizedBox(
         height: deviceHeight * 0.5,
         width: deviceWidth * 0.19,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height: deviceHeight * 0.25,
                 width: deviceWidth * 0.3,
                 child: Image(
@@ -269,89 +267,115 @@ Widget myAppForPC(
 ///自己紹介 @ PC
 Widget aboutMeForPC(
     {required String aboutme,
+    required String career,
     required String tools,
     required String language,
     required double deviceHeight,
     required double deviceWidth,
     required String backgroundImageUrl}) {
-  return Container(
-    child: Card(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: deviceHeight * 0.02,
-            width: deviceWidth * 0.025,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
+  return Card(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: deviceHeight * 0.02,
+          width: deviceWidth * 0.025,
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 32.0, bottom: 8.0),
+                child: Text(
                   '自己紹介',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: deviceHeight * 0.025,
-                  width: deviceWidth * 0.025,
-                ),
-                CircleAvatar(
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
                   radius: deviceHeight * 0.05,
                   backgroundImage: AssetImage(backgroundImageUrl),
                 ),
-                SizedBox(
-                  height: deviceHeight * 0.025,
-                  width: deviceWidth * 0.025,
-                ),
-                Text(
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+                child: Text(
                   aboutme,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: deviceHeight * 0.025,
-            width: deviceWidth * 0.025,
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 32.0, bottom: 8.0),
+                child: Text(
+                  '学歴＆職歴',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+                child: Text(
+                  career,
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 32.0, bottom: 8.0),
+                child: Text(
                   'ツール',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: deviceHeight * 0.025,
-                  width: deviceWidth * 0.025,
-                ),
-                Text(
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+                child: Text(
                   tools,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          SizedBox(
-            height: deviceHeight * 0.025,
-            width: deviceWidth * 0.025,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Text(
+        ),
+        Expanded(
+          flex: 2,
+          child: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(
+                    left: 8.0, right: 8.0, top: 32.0, bottom: 8.0),
+                child: Text(
                   '言語',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: deviceHeight * 0.025,
-                  width: deviceWidth * 0.025,
-                ),
-                Text(
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 24.0),
+                child: Text(
                   language,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }
@@ -368,7 +392,7 @@ Widget myAppForPhone(
       InkWell(
         child: Card(
           elevation: 5.0,
-          child: Container(
+          child: SizedBox(
             // height: deviceHeight * 0.55,
             // width: deviceWidth * 0.9,
             height: 500.0, width: 350.0,
@@ -376,7 +400,7 @@ Widget myAppForPhone(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: SizedBox(
                     // height: deviceHeight * 0.25,
                     // width: deviceWidth * 0.85,
                     height: 250.0, width: 340.0,
@@ -423,94 +447,114 @@ Widget myAppForPhone(
 ///自己紹介 @ スマホ
 Widget aboutMeForPhone(
     {required String aboutme,
+    required String career,
     required String tools,
     required String language,
     required double deviceHeight,
     required double deviceWidth,
     required String backgroundImageUrl}) {
-  return Container(
-    child: Card(
-      elevation: 5.0,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20.0,
-                  width: 350.0,
-                ),
-                Text(
-                  '自己紹介',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 20.0,
-                  width: 350.0,
-                ),
-                CircleAvatar(
-                  radius: 40.0,
-                  backgroundImage: AssetImage(backgroundImageUrl),
-                ),
-                SizedBox(
-                  height: 20.0,
-                  width: 350.0,
-                ),
-                Text(
-                  aboutme,
-                ),
-              ],
+  const _maxWidth = 350.0;
+  const _maxHeight = 20.0;
+  return Card(
+    elevation: 5.0,
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Column(
+          children: [
+            const SizedBox(
+              height: _maxHeight,
+              width: _maxWidth,
             ),
-          ),
-          SizedBox(
-            height: 30.0,
-            width: 350.0,
-          ),
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  'ツール',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 350.0,
-                ),
-                Text(
-                  tools,
-                ),
-              ],
+            const Text(
+              '自己紹介',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          ),
-          SizedBox(
-            height: 30.0,
-            width: 350.0,
-          ),
-          Container(
-            child: Column(
-              children: [
-                Text(
-                  '言語',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 15.0,
-                  width: 350.0,
-                ),
-                Text(
-                  language,
-                ),
-                SizedBox(
-                  height: 30.0,
-                  width: 350.0,
-                ),
-              ],
+            const SizedBox(
+              height: _maxHeight,
+              width: _maxWidth,
             ),
-          ),
-        ],
-      ),
+            CircleAvatar(
+              radius: 40.0,
+              backgroundImage: AssetImage(backgroundImageUrl),
+            ),
+            const SizedBox(
+              height: _maxHeight,
+              width: _maxWidth,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+              child: Text(
+                aboutme,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 30.0,
+        ),
+        Column(
+          children: [
+            const Text(
+              '学歴＆職歴',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+              child: Text(
+                career,
+              ),
+            ),
+          ],
+        ),
+        Column(
+          children: [
+            const Text(
+              'ツール',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+              child: Text(
+                tools,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 30.0,
+        ),
+        Column(
+          children: [
+            const Text(
+              '言語',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 0.0, horizontal: 16.0),
+              child: Text(
+                language,
+              ),
+            ),
+            const SizedBox(
+              height: 30.0,
+            ),
+          ],
+        ),
+      ],
     ),
   );
 }
