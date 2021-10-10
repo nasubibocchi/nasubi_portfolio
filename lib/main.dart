@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
         backgroundColor: kBaseColour,
         body: deviceWidth > 1200.0
             ? SingleChildScrollView(
-              child: Row(
+                child: Row(
                   children: [
                     SizedBox(
                       //height: 800で * 1, width: 250で0.2
@@ -61,9 +61,7 @@ class MyHomePage extends StatelessWidget {
                             height: deviceHeight * 0.005,
                             width: deviceWidth * 0.05,
                           ),
-                          appInfo(
-                              deviceHeight: deviceHeight,
-                              deviceWidth: deviceWidth),
+                          AppInfo(),
                         ],
                       ),
                     ),
@@ -84,7 +82,7 @@ class MyHomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-            )
+              )
             : SingleChildScrollView(
                 child: Center(
                   child: Column(
@@ -94,9 +92,7 @@ class MyHomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const SizedBox(height: 60.0),
-                          appInfo(
-                              deviceHeight: deviceHeight,
-                              deviceWidth: deviceWidth),
+                          AppInfo(),
                         ],
                       ),
                       const SizedBox(height: 10.0),
@@ -121,56 +117,64 @@ class MyHomePage extends StatelessWidget {
 
 ///ウィジェット
 ///アプリ紹介
-Widget appInfo({required double deviceHeight, required double deviceWidth}) {
-  return deviceWidth > 1200.0
-      ? Column(
-        children: [
-          Row(
-            //TODO: PCはデータが増えたらここも修正
+class AppInfo extends StatelessWidget {
+  const AppInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
+
+    return deviceWidth > 1200.0
+        ? Column(
             children: [
-              myAppForPC(
-                  myAppList: myAppList,
-                  deviceHeight: deviceHeight,
-                  deviceWidth: deviceWidth,
-                  index: 0),
-              SizedBox(
-                height: deviceHeight * 0.01,
-                width: deviceWidth * 0.01,
+              Row(
+                //TODO: PCはデータが増えたらここも修正
+                children: [
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 0),
+                  SizedBox(
+                    height: deviceHeight * 0.01,
+                    width: deviceWidth * 0.01,
+                  ),
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 1),
+                  SizedBox(
+                    height: deviceHeight * 0.01,
+                    width: deviceWidth * 0.01,
+                  ),
+                  myAppForPC(
+                      myAppList: myAppList,
+                      deviceHeight: deviceHeight,
+                      deviceWidth: deviceWidth,
+                      index: 2),
+                ],
               ),
-              myAppForPC(
-                  myAppList: myAppList,
-                  deviceHeight: deviceHeight,
-                  deviceWidth: deviceWidth,
-                  index: 1),
-              SizedBox(
-                height: deviceHeight * 0.01,
-                width: deviceWidth * 0.01,
-              ),
-              myAppForPC(
-                  myAppList: myAppList,
-                  deviceHeight: deviceHeight,
-                  deviceWidth: deviceWidth,
-                  index: 2),
             ],
-          ),
-        ],
-      )
-      : Column(
-          children: [
-            SizedBox(
-              ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
-              height: 550.0,
-              width: 350.0,
-              child: PageView.builder(
-                  controller:
-                      PageController(initialPage: 0, viewportFraction: 0.9),
-                  itemCount: myAppList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return myAppForPhone(myAppList: myAppList, index: index);
-                  }),
-            ),
-          ],
-        );
+          )
+        : Column(
+            children: [
+              SizedBox(
+                ///PageViewの描画範囲を決めておく（これがないとrenderErrorになる）
+                height: 550.0,
+                width: 350.0,
+                child: PageView.builder(
+                    controller:
+                        PageController(initialPage: 0, viewportFraction: 0.9),
+                    itemCount: myAppList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return myAppForPhone(myAppList: myAppList, index: index);
+                    }),
+              ),
+            ],
+          );
+  }
 }
 
 ///------------------------------------------------------
@@ -372,7 +376,7 @@ Widget myAppForPhone(
         dotsCount: myAppList.length,
         position: index.toDouble(),
         decorator:
-            DotsDecorator(color: kBaseColour, activeColor: kAccentColour),
+            DotsDecorator(color: kNuanceColour, activeColor: kAccentColour),
       ),
     ],
   );
