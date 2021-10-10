@@ -7,7 +7,7 @@ import 'constants.dart';
 import 'data.dart';
 
 void main() async {
-  // // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();//firebaseの機能を中で使っていないので不要
   runApp(MyApp());
 }
