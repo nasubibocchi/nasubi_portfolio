@@ -108,27 +108,13 @@ class MyHomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(
-                            height: deviceHeight * 0.05,
-                            width: deviceWidth * 0.05,
-                          ),
-                          // Text(
-                          //   '作成したアプリ',
-                          //   style: TextStyle(fontWeight: FontWeight.bold),
-                          // ),
-                          SizedBox(
-                            height: deviceHeight * 0.01,
-                            width: deviceWidth * 0.05,
-                          ),
+                          const SizedBox(height: 60.0),
                           appInfo(
                               deviceHeight: deviceHeight,
                               deviceWidth: deviceWidth),
                         ],
                       ),
-                      const SizedBox(
-                        height: 30.0,
-                        width: 20.0,
-                      ),
+                      const SizedBox(height: 10.0),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: aboutMeForPhone(
@@ -137,8 +123,6 @@ class MyHomePage extends StatelessWidget {
                           tools: toolsText,
                           language: languageText,
                           backgroundImageUrl: iconsText,
-                          deviceWidth: deviceWidth,
-                          deviceHeight: deviceHeight,
                         ),
                       ),
                     ],
@@ -201,8 +185,6 @@ Widget appInfo({required double deviceHeight, required double deviceWidth}) {
                   itemBuilder: (BuildContext context, int index) {
                     return myAppForPhone(
                         myAppList: myAppList,
-                        deviceHeight: deviceHeight,
-                        deviceWidth: deviceWidth,
                         index: index);
                   }),
             ),
@@ -384,8 +366,6 @@ Widget aboutMeForPC(
 ///アプリ紹介【項目】@ スマホ
 Widget myAppForPhone(
     {required List<Map<String, dynamic>> myAppList,
-    required double deviceHeight,
-    required double deviceWidth,
     required int index}) {
   return Column(
     children: [
@@ -393,37 +373,24 @@ Widget myAppForPhone(
         child: Card(
           elevation: 5.0,
           child: SizedBox(
-            // height: deviceHeight * 0.55,
-            // width: deviceWidth * 0.9,
             height: 500.0, width: 350.0,
             child: Column(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
-                    // height: deviceHeight * 0.25,
-                    // width: deviceWidth * 0.85,
                     height: 250.0, width: 340.0,
                     child: Image(
                       image: AssetImage(myAppList[index]['imageUrl']),
                     ),
                   ),
                 ),
-                // SizedBox(
-                //   height: deviceHeight * 0.025,
-                //   width: deviceWidth * 0.8,
-                // ),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Text(
                     myAppList[index]['information'],
-                    // style: TextStyle(fontSize: deviceHeight * 0.02),
                   ),
                 ),
-                // SizedBox(
-                //   height: deviceHeight * 0.025,
-                //   width: deviceWidth * 0.8,
-                // ),
               ],
             ),
           ),
@@ -450,8 +417,6 @@ Widget aboutMeForPhone(
     required String career,
     required String tools,
     required String language,
-    required double deviceHeight,
-    required double deviceWidth,
     required String backgroundImageUrl}) {
   const _maxWidth = 350.0;
   const _maxHeight = 20.0;
