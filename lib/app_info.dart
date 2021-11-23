@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nasubi_portfolio/main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'constants.dart';
@@ -49,6 +48,13 @@ class AppInfo extends StatelessWidget {
                   MyAppForPC(
                       myAppList: myAppList,
                       index: 3),
+                  SizedBox(
+                    height: deviceHeight * 0.01,
+                    width: deviceWidth * 0.01,
+                  ),
+                  MyAppForPC(
+                      myAppList: myAppList,
+                      index: 4),
                   SizedBox(
                     height: deviceHeight * 0.01,
                     width: deviceWidth * 0.01,
