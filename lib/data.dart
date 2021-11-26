@@ -33,6 +33,11 @@ List<Map<String, dynamic>> releasedAppList = [
     'imageUrl': 'images/cosmekanri.png',
     'iOSUrl': 'https://apps.apple.com/jp/app/%E3%82%B3%E3%82%B9%E3%83%A1%E7%AE%A1%E7%90%86/id1591358093',
     'androidUrl': 'https://play.google.com/store/apps/details?id=com.matsuhito.cosmekanri',
+  },
+  {
+    'imageUrl': 'images/tamaneko.png',
+    'iOSUrl': 'https://apps.apple.com/jp/app/%E7%8C%AB%E3%82%AB%E3%83%95%E3%82%A7%E3%81%9F%E3%81%BE%E3%81%AD%E3%81%93/id1591347927',
+    'androidUrl': 'https://play.google.com/store/apps/details?id=com.catcafe.tamaneko',
   }
 ];
 

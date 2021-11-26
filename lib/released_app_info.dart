@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nasubi_portfolio/main.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'constants.dart';
@@ -25,6 +24,10 @@ class ReleasedAppInfo extends StatelessWidget {
                 //TODO: PCはデータが増えたらここも修正
                 children: [
                   ReleasedAppWidget(index: 0, releasedAppList: releasedAppList),
+                  SizedBox(
+                    width: deviceWidth * 0.01,
+                  ),
+                  ReleasedAppWidget(index: 1, releasedAppList: releasedAppList),
                   SizedBox(
                     width: deviceWidth * 0.01,
                   ),
